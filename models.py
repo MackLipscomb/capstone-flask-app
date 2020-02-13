@@ -7,7 +7,7 @@ DATABASE = PostgresqlDatabase('medconnect_app')
 class Patient(UserMixin, Model):
     name = CharField(unique = True)
     email = CharField(unique = True)
-    password = Charfield()
+    password = CharField()
     symptoms = CharField()
     specialty = CharField()
 
@@ -18,8 +18,9 @@ class Provider(Model):
     name = CharField(unique = True)
     email = CharField(unique = True)
     password = CharField()
-    diagnoses = CharField()
     specialty = CharField()
+    diagnoses = ForeignKeyField(Patient, backref = 'providers')
+
 
     class Meta:
         database = DATABASE
@@ -30,4 +31,3 @@ def initialize():
     print ('Tables Created')
     DATABASE.close()
 
-    
