@@ -1,8 +1,13 @@
 import datetime
 from peewee import *
 # from flask_login import UserMixin
+import os
+from playhouse.db_url import connect
 
-DATABASE = PostgresqlDatabase('medconnect_app')
+if 'ON_HEROKU' in os.environ:
+    DATABASE = connect(os.environ.get('DATABASE_URL'))
+else:
+    DATABASE = PostgresqlDatabase('medconnnect_app')
 
 class Patient(Model):
     username = CharField(unique = True)

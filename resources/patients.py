@@ -29,7 +29,7 @@ def update_patient(id):
         return jsonify(data = {}, status = {'code': 400, 'message': 'Update failed'})
 
 
-@patients.route('/<id>', methods = ["DELETE"])
+@patient.route('/<id>', methods = ["DELETE"])
 def delete_patient(id):
     try:
         patient = models.Patient.get_by_id(id)
